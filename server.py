@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 from deepface import DeepFace  # Import DeepFace for embedding extraction
 import io
+import os
 
 app = Flask(__name__)
 
@@ -66,4 +67,6 @@ def predict_image():
     return jsonify({'prediction': label[0]})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
+    # Use Render's dynamically assigned port
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
